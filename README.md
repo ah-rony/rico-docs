@@ -17,11 +17,3 @@ Documentation site for the **Rico Shopify theme** — a premium, conversion-focu
 - **Keyboard accessible** — Ctrl+K opens search; Escape closes all panels
 - **Zero dependencies** — no frameworks, no bundler, no runtime requirements
 
-## File Structure
-
-rico-docs/
-├── index.html      # Shell HTML — layout, header, sidebar, TOC wiring
-├── style.css       # All styles — reset, variables, layout, components, responsive
-├── script.js       # Interactivity — navigation, search, scroll-spy, sidebar
-├── content.js      # Page content — all documentation pages as a JS data map
-└── README.md       # This file
