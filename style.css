@@ -1,27 +1,6 @@
-/* ═══════════════════════════════════════════════════════════
-   style.css — Rico Documentation Theme
-   ═══════════════════════════════════════════════════════════
+/* style.css — Rico Documentation Theme */
 
-   TABLE OF CONTENTS
-   1. Reset & Base
-   2. CSS Variables
-   3. Header
-   4. Overlay (backdrop blur)
-   5. Mobile Search Panel
-   6. Search Dropdown (desktop)
-   7. Layout (three-column)
-   8. Sidebar Navigation
-   9. Main Content
-      9a. Breadcrumb
-      9b. Typography
-      9c. Settings Table
-      9d. Pagination
-   10. Table of Contents (right aside)
-   11. Responsive Breakpoints
-   ═══════════════════════════════════════════════════════════ */
-
-
-/* ─── 1. RESET & BASE ─── */
+/* Reset & Base */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -42,8 +21,7 @@ body {
   height: 100%;
 }
 
-
-/* ─── 2. CSS VARIABLES ─── */
+/* CSS Variables */
 :root {
   --bg:              #ffffff;
   --text:            #323232;
@@ -60,7 +38,6 @@ body {
   --badge-border:    #e5e7eb;
   --breadcrumb:      #6b7280;
 
-  /* --header-h:        56px; */
   --header-h:        80px;
   --sidebar-w:       270px;
   --toc-w:           270px;
@@ -68,14 +45,10 @@ body {
   --overlay-bg:      rgba(0, 0, 0, 0.35);
   --overlay-blur:    3px;
 
-  /* Container */
   --container-max:   1360px;
 }
 
-
-/* ════════════════════════════════════════
-   3. HEADER
-   ════════════════════════════════════════ */
+/* Header */
 header {
   position: fixed;
   top: 0;
@@ -92,7 +65,6 @@ header {
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-/* Inner container to constrain header content */
 .header-inner {
   display: flex;
   align-items: center;
@@ -102,9 +74,8 @@ header {
   margin: 0 auto;
 }
 
-/* ─── Hamburger: HIDDEN on desktop, visible on tablet/mobile ─── */
 .hamburger {
-  display: none;          /* hidden by default (desktop) */
+  display: none;
   align-items: center;
   justify-content: center;
   background: none;
@@ -118,7 +89,6 @@ header {
 }
 .hamburger:hover { background: var(--sidebar-active); }
 
-/* ─── Logo ─── */
 .logo {
   font-family: 'DM Sans', sans-serif;
   font-weight: 600;
@@ -139,7 +109,6 @@ header {
   color: var(--text-muted);
 }
 
-/* ─── Desktop Search Bar ─── */
 .search-wrap {
   flex: 1;
   max-width: 440px;
@@ -179,7 +148,6 @@ header {
 }
 .search-input::placeholder { color: var(--text-light); }
 
-/* Ctrl+K hint — hidden when focused */
 .search-kbd {
   display: flex;
   align-items: center;
@@ -187,7 +155,6 @@ header {
   flex-shrink: 0;
   transition: opacity 0.15s;
 }
-/* Hide kbd when search bar is focused */
 .search-bar:focus-within .search-kbd {
   opacity: 0;
   pointer-events: none;
@@ -200,7 +167,6 @@ header {
   font-family: 'DM Mono', monospace;
 }
 
-/* ─── Mobile Search Icon ─── */
 .mobile-search-btn {
   display: none;
   margin-left: auto;
@@ -215,7 +181,6 @@ header {
 }
 .mobile-search-btn:hover { background: var(--sidebar-active); }
 
-/* ─── Close (X) Button — hidden by default ─── */
 .close-btn {
   display: none;
   align-items: center;
@@ -231,18 +196,6 @@ header {
 }
 .close-btn:hover { background: var(--sidebar-active); }
 
-/* ─── Header open state ─── */
-/* header.header-panel-open .hamburger,
-header.header-panel-open .logo,
-header.header-panel-open .search-wrap,
-header.header-panel-open .mobile-search-btn {
-  display: none !important;
-}
-header.header-panel-open .close-btn {
-  display: flex;
-} */
-
-/* Hide entire header when sidebar is open */
 header.header-panel-open {
   transform: translateY(-100%);
   opacity: 0;
@@ -250,43 +203,25 @@ header.header-panel-open {
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-
-
-
-
 .mobile-search-close-btn {
   display: none;
   position: fixed;
-  top: 0;
-
-  /* KEY FIX: attach to panel edge */
+  top: 7px;
   left: calc(100vw - min(320px, 85vw) - 56px);
-
-  width: 56px;
-  height: 56px;
-
+  width: 50px;
+  height: 50px;
   background: #fff;
   border: 1px solid var(--border);
   border-right: none;
-
   align-items: center;
   justify-content: center;
-
   cursor: pointer;
   z-index: 180;
 }
+.mobile-search-close-btn.visible { display: flex; }
+.mobile-search-close-btn:hover { background: var(--sidebar-active); }
 
-.mobile-search-close-btn.visible {
-  display: flex;
-}
-
-.mobile-search-close-btn:hover {
-  background: var(--sidebar-active);
-}
-
-/* ════════════════════════════════════════
-   4. OVERLAY
-   ════════════════════════════════════════ */
+/* Overlay */
 .overlay {
   display: none;
   position: fixed;
@@ -299,11 +234,7 @@ header.header-panel-open {
 }
 .overlay.open { display: block; }
 
-
-/* ════════════════════════════════════════
-   5. MOBILE SEARCH PANEL
-   Slides from the right
-   ════════════════════════════════════════ */
+/* Mobile Search Panel */
 .mobile-search-panel {
   position: fixed;
   top: 0;
@@ -349,10 +280,7 @@ header.header-panel-open {
   font-size: 13px;
 }
 
-
-/* ════════════════════════════════════════
-   6. SEARCH DROPDOWN (desktop)
-   ════════════════════════════════════════ */
+/* Search Dropdown (desktop) */
 .search-dropdown {
   display: none;
   position: fixed;
@@ -395,19 +323,7 @@ header.header-panel-open {
   font-size: 13px;
 }
 
-
-/* ════════════════════════════════════════
-   7. LAYOUT — Three-Column
-   Sidebar fixed left | Main center | TOC fixed right
-   All constrained within a max-width container
-   ════════════════════════════════════════ */
-.page-container {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  width: 100%;
-  position: relative;
-}
-
+/* Layout */
 .layout {
   display: flex;
   margin-top: var(--header-h);
@@ -417,10 +333,7 @@ header.header-panel-open {
   margin-right: auto;
 }
 
-
-/* ════════════════════════════════════════
-   8. SIDEBAR (Left — fixed, 240px)
-   ════════════════════════════════════════ */
+/* Sidebar */
 aside.sidebar {
   width: var(--sidebar-w);
   flex-shrink: 0;
@@ -429,7 +342,6 @@ aside.sidebar {
   position: fixed;
   top: var(--header-h);
   bottom: 0;
-  /* Position relative to container left edge */
   left: max(0px, calc((100vw - var(--container-max)) / 2));
   overflow-y: auto;
   padding: 20px 0 40px;
@@ -442,7 +354,6 @@ aside.sidebar::-webkit-scrollbar-thumb {
   border-radius: 4px;
 }
 
-/* Nav groups */
 .nav-group        { margin-bottom: 30px; }
 .nav-group-label  {
   font-size: 13px;
@@ -450,8 +361,7 @@ aside.sidebar::-webkit-scrollbar-thumb {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
-  /* padding: 0 16px 6px; */
-  padding:8px;
+  padding: 8px;
 }
 
 .nav-link {
@@ -487,13 +397,10 @@ aside.sidebar::-webkit-scrollbar-thumb {
   flex-shrink: 0;
   transition: transform 0.2s;
 }
-.nav-chevron.open      { transform: rotate(90deg); }
-/* .nav-chevron.down      { transform: rotate(0deg); }
-.nav-chevron.down.open { transform: rotate(180deg); } */
+.nav-chevron.open { transform: rotate(90deg); }
 
 .nav-sub {
-  /* padding-left: 12px; */
-  margin-left:12px;
+  margin-left: 12px;
   border-left: 1px solid #32323266;
   overflow: hidden;
   max-height: 0;
@@ -502,7 +409,6 @@ aside.sidebar::-webkit-scrollbar-thumb {
 .nav-sub.open { max-height: 400px; }
 
 .nav-sub .nav-link {
-  /* padding: 4px 16px 4px 28px; */
   padding: 4px 16px 4px 12px;
   font-size: 13px;
   color: var(--text-muted);
@@ -510,11 +416,7 @@ aside.sidebar::-webkit-scrollbar-thumb {
 .nav-sub .nav-link:hover  { color: var(--text); }
 .nav-sub .nav-link.active { color: var(--text); font-weight: 500; background: var(--sidebar-active); }
 
-
-/* ════════════════════════════════════════
-   9. MAIN CONTENT
-   Left margin = sidebar-w, Right margin = toc-w
-   ════════════════════════════════════════ */
+/* Main Content */
 main {
   margin-left: var(--sidebar-w);
   margin-right: var(--toc-w);
@@ -523,7 +425,7 @@ main {
   padding: 36px 48px 60px;
 }
 
-/* ─── 9a. Breadcrumb ─── */
+/* Breadcrumb */
 .breadcrumb {
   display: flex;
   align-items: center;
@@ -536,18 +438,15 @@ main {
   font-weight: 500;
   flex-wrap: wrap;
 }
-.breadcrumb a {
-  color: var(--breadcrumb);
-  text-decoration: none;
-}
+.breadcrumb a { color: var(--breadcrumb); text-decoration: none; }
 .breadcrumb a:hover { color: var(--text); }
 
-/* ─── 9b. Typography ─── */
+/* Typography */
 .page-title {
   font-size: 36px;
   font-weight: 500;
   letter-spacing: -0.5px;
-  color:#323232;
+  color: #323232;
   margin-bottom: 36px;
   line-height: 1.2;
 }
@@ -584,7 +483,7 @@ main {
   color: var(--text);
 }
 
-/* ─── 9c. Settings Table ─── */
+/* Settings Table */
 .settings-table {
   width: 100%;
   border-collapse: collapse;
@@ -634,47 +533,13 @@ main {
   color: var(--nav-link);
 }
 
-/* ─── 9d. Pagination ─── */
-/* .pagination {
-  display: flex;
-  gap: 16px;
-  margin-top: 48px;
-}
-
-.pag-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 16px 20px;
-  text-decoration: none;
-  color: var(--text);
-  background: #fff;
-  border: 1px solid var(--border);
-  transition: background 0.12s, border-color 0.12s;
-  cursor: pointer;
-}
-.pag-btn:hover {
-  background: var(--sidebar-active);
-  border-color: #d1d5db;
-}
-
-.pag-btn.prev { align-items: flex-start; }
-.pag-btn.next { align-items: flex-end; } */
-
-
-
-
-/* ═══════════════════════════════════════
-   9d. Pagination (CLEAN FIXED STYLE)
-   ═══════════════════════════════════════ */
-
+/* Pagination */
 .pagination {
   display: flex;
   gap: 16px;
   margin-top: 48px;
 }
 
-/* button base */
 .pag-btn {
   flex: 1;
   display: flex;
@@ -686,35 +551,21 @@ main {
   background: #fff;
   cursor: pointer;
   text-decoration: none;
-
   transition: background 0.15s, border-color 0.15s;
 }
-
 .pag-btn:hover {
   background: var(--sidebar-active);
   border-color: #d1d5db;
 }
+.pag-btn.prev { flex-direction: row; }
+.pag-btn.next { flex-direction: row; text-align: right; }
 
-/* LEFT (Previous) alignment */
-.pag-btn.prev {
-  flex-direction: row;
-}
-
-/* RIGHT (Next) alignment */
-.pag-btn.next {
-  flex-direction: row;
-  text-align: right;
-}
-
-/* text stack */
 .pag-text {
   display: flex;
   flex-direction: column;
   gap: 12px;
   min-width: 0;
 }
-
-/* small label */
 .pag-label {
   font-size: 12px;
   color: #1C1C1CCC;
@@ -722,8 +573,6 @@ main {
   align-items: center;
   gap: 6px;
 }
-
-/* main title */
 .pag-name {
   font-size: 16px;
   color: #1D1D1D;
@@ -731,48 +580,16 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-/* icon box */
 .pag-icon {
-  /* width: 34px;
-  height: 34px; */
-  color:#323232B2;
+  color: #323232B2;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
+.pag-placeholder { flex: 1; }
 
-/* placeholder */
-.pag-placeholder {
-  flex: 1;
-}
-
-
-
-
-
-/* Placeholder when no prev/next */
-/* .pag-placeholder { flex: 1; }
-
-.pag-label {
-  font-size: 11.5px;
-  color: var(--text-light);
-  margin-bottom: 4px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.pag-name {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text);
-} */
-
-
-/* ════════════════════════════════════════
-   10. TABLE OF CONTENTS (Right — fixed 220px)
-   ════════════════════════════════════════ */
+/* Table of Contents */
 aside.toc {
   width: var(--toc-w);
   flex-shrink: 0;
@@ -780,7 +597,6 @@ aside.toc {
   top: var(--header-h);
   right: max(0px, calc((100vw - var(--container-max)) / 2));
   bottom: 0;
-  /* border-left: 1px solid var(--border); */
   padding: 28px 20px;
   overflow-y: auto;
   background: var(--bg);
@@ -798,8 +614,8 @@ aside.toc {
   gap: 6px;
 }
 
-.toc-list        { list-style: none; }
-.toc-list li     { margin-bottom: 6px; }
+.toc-list     { list-style: none; }
+.toc-list li  { margin-bottom: 6px; }
 
 .toc-link {
   font-size: 14px;
@@ -812,29 +628,107 @@ aside.toc {
 .toc-link:hover  { color: var(--text); }
 .toc-link.active { color: var(--text); font-weight: 500; }
 
+/* Mobile TOC Panel */
+.mobile-toc-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(320px, 85vw);
+  background: #fff;
+  border-left: 1px solid var(--border);
+  z-index: 160;
+  overflow-y: auto;
+  padding: 20px 0;
+  transform: translateX(100%);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.mobile-toc-panel.open { transform: translateX(0); }
+.mobile-toc-panel .toc-list { padding: 0 16px; }
+.mobile-toc-panel .toc-link {
+  font-size: 14px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-light);
+  display: block;
+}
+.mobile-toc-panel .toc-link:last-child { border-bottom: none; }
 
-/* ════════════════════════════════════════
-   11. RESPONSIVE BREAKPOINTS
-   ════════════════════════════════════════ */
+.mobile-toc-close-btn {
+  display: none;
+  position: fixed;
+  top: 7px;
+  left: calc(100vw - min(320px, 85vw) - 56px);
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-right: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 180;
+}
+.mobile-toc-close-btn.visible { display: flex; }
+.mobile-toc-close-btn:hover { background: var(--sidebar-active); }
 
-/* ─── ≤1200px: Narrower TOC ─── */
+/* Sidebar close button */
+.sidebar-close-btn {
+  display: none;
+  position: fixed;
+  top: 15px;
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 180;
+}
+.sidebar-close-btn.visible { display: flex; }
+.sidebar-close-btn:hover { background: var(--sidebar-active); }
+
+/* Breadcrumb row */
+.breadcrumb-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.breadcrumb-row .breadcrumb { margin-bottom: 0; }
+
+.toc-breadcrumb-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 8px;
+  color: var(--text);
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s;
+  flex-shrink: 0;
+}
+.toc-breadcrumb-btn:hover { background: var(--sidebar-active); }
+
+/* Mobile top bar in sidebar */
+.sidebar-mobile-top { display: none; }
+
+/* Responsive */
 @media (max-width: 1200px) {
   :root { --toc-w: 200px; }
   main  { padding: 32px 36px 60px; }
 }
 
-/* ─── ≤1024px: Hide TOC ─── */
 @media (max-width: 1024px) {
-  aside.toc    { display: none; }
-  main         { margin-right: 0; }
-}
+  aside.toc { display: none; }
+  main      { margin-right: 0; }
 
-/* ─── ≤900px (tablet): Show hamburger, sidebar becomes overlay ─── */
-.sidebar-mobile-top {
-  display: none;
-}
-
-@media (max-width: 900px) {
+  .hamburger        { display: flex; }
+  .mobile-search-btn { display: flex; }
+  .search-wrap       { display: none; }
+  .toc-breadcrumb-btn { display: flex; }
+  .mobile-toc-btn    { display: flex; }
 
   .sidebar-mobile-top {
     display: flex;
@@ -850,13 +744,6 @@ aside.toc {
     z-index: 2;
   }
 
-}
-@media (max-width: 900px) {
-
-  .hamburger {
-    display: flex;
-  }
-
   aside.sidebar {
     width: min(280px, 85vw);
     position: fixed;
@@ -868,13 +755,10 @@ aside.toc {
     z-index: 170;
     transform: translateX(-100%);
     transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    padding-top: 56px; /* space for Rico top */
+    padding-top: 56px;
     border-right: 1px solid var(--border);
   }
-
-  aside.sidebar.open {
-    transform: translateX(0);
-  }
+  aside.sidebar.open { transform: translateX(0); }
 
   main {
     margin-left: 0;
@@ -882,79 +766,49 @@ aside.toc {
     padding: 28px 24px 60px;
   }
 
-  .search-wrap {
-    display: none;
-  }
+  .page-title    { font-size: 28px; }
+  .section-heading { font-size: 18px; }
 
-  .mobile-search-btn {
-    display: flex;
-  }
-
-  .page-title {
-    font-size: 28px;
-  }
-
-  .section-heading {
-    font-size: 18px;
-  }
+  .sidebar.open ~ .sidebar-close-btn,
+  .sidebar-close-btn.visible { display: flex; }
 }
 
-/* ─── ≤600px: Mobile ─── */
 @media (max-width: 600px) {
   .page-title { font-size: 24px; }
-
-  .pagination {
-    flex-direction: column;
-  }
-  .pag-btn.next { align-items: flex-start; }
-
+  .pagination { flex-direction: column; }
+  .pag-btn.next { align-items: center; }
   .settings-table { font-size: 12.5px; }
   .settings-table th,
   .settings-table td { padding: 8px; }
 }
 
-/* ─── ≤480px: Small phones ─── */
 @media (max-width: 480px) {
   header { padding: 0 12px; gap: 8px; }
   main   { padding: 20px 16px 60px; }
 }
 
 
-/* ════════════════════════════════════════
-   SIDEBAR X CLOSE BUTTON (mobile overlay)
-   The X button sits at the top-right OUTSIDE
-   the sidebar panel, beside it with a gap.
-   ════════════════════════════════════════ */
+/* ============================== */
 
-/*
-   On tablet/mobile: when sidebar is open,
-   the X button appears to the right of the
-   sidebar with a border separating them.
-   This is rendered as a fixed button.
-*/
-.sidebar-close-btn {
-  display: none;
-  position: fixed;
-  top: 0;
-  width: 56px;
-  height: 56px;
-  background: #fff;
-  border: 1px solid var(--border);
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 180;
+.callout-box {
+  padding: 16px 18px;
+  margin: 16px 0;
+  background: #fff8f0;
+  border: 1px solid #a87f5033;
+}
+/* .callout__title {
+  font-weight: 600;
+  margin-bottom: 10px;
+} */
+
+.callout__steps {
+  margin: 0;
+  padding-left: 18px;
 }
 
-.sidebar-close-btn.visible {
-  display: flex;
+.callout__steps li {
+  margin: 6px 0;
 }
-.sidebar-close-btn:hover { background: var(--sidebar-active); }
 
-@media (max-width: 900px) {
-  /* Show sidebar X button when sidebar is open */
-  .sidebar.open ~ .sidebar-close-btn,
-  .sidebar-close-btn.visible {
-    display: flex;
-  }
-}
+
+

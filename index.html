@@ -4,44 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rico Documentation</title>
-  <!-- <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/> -->
-   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════════
-       OVERLAY — blurs background when sidebar/search open
-       ═══════════════════════════════════════════ -->
   <div class="overlay" id="overlay"></div>
 
-  <!-- ═══════════════════════════════════════════
-       HEADER
-       Desktop: Logo | SearchBar (center)
-       Tablet/Mobile: Hamburger | Logo | SearchIcon (far right)
-       When sidebar open: X button replaces all
-       ═══════════════════════════════════════════ -->
   <header id="siteHeader">
     <div class="header-inner">
-
-      <!-- Hamburger: HIDDEN on desktop, shown on ≤900px -->
       <button class="hamburger" id="hamburger" aria-label="Open navigation" onclick="openSidebar()">
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path d="M3 12h18M3 6h18M3 18h18"/>
         </svg>
       </button>
 
-      <!-- Logo -->
       <a href="#" class="logo" onclick="navigateTo('welcome'); return false;">Rico<sup>©</sup></a>
 
-      <!-- Desktop search bar (hidden on ≤900px) -->
       <div class="search-wrap" id="searchWrap">
         <div class="search-bar" id="searchBar">
           <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
           </svg>
           <input class="search-input" id="searchInput" type="text" placeholder="Search..." autocomplete="off"/>
-          <!-- Ctrl+K hint: hidden when search bar is focused (via CSS) -->
           <div class="search-kbd">
             <span class="kbd">Ctrl</span>
             <span class="kbd">K</span>
@@ -49,28 +34,22 @@
         </div>
       </div>
 
-      <!-- Mobile search icon (shown on ≤900px) -->
       <button class="mobile-search-btn" id="mobileSearchBtn" aria-label="Open search" onclick="openMobileSearch()">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
         </svg>
       </button>
-
-      <!-- Close X button: replaces all header content when sidebar/search open (desktop fallback) -->
 
       <button class="close-btn" id="closeBtn" aria-label="Close" onclick="closeAll()">
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path d="M18 6L6 18M6 6l12 12"/>
         </svg>
       </button>
-
     </div>
   </header>
 
-  <!-- Search Dropdown (desktop) -->
   <div class="search-dropdown" id="searchDropdown"></div>
 
-  <!-- Mobile Search Panel (slides from right) -->
   <div class="mobile-search-panel" id="mobileSearchPanel">
     <div class="mobile-search-inner">
       <div class="search-bar mobile-panel-bar">
@@ -84,36 +63,41 @@
   </div>
 
   <button class="mobile-search-close-btn" id="mobileSearchCloseBtn" aria-label="Close search">
-  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-    <path d="M18 6L6 18M6 6l12 12"/>
-  </svg>
-</button>
-
-
-  <!-- ═══════════════════════════════════════════
-       SIDEBAR X CLOSE BUTTON
-       Fixed button that appears OUTSIDE the sidebar
-       to the right of it, on tablet/mobile.
-       Positioned by JS when sidebar opens.
-       ═══════════════════════════════════════════ -->
-  <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close navigation">
-    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
       <path d="M18 6L6 18M6 6l12 12"/>
     </svg>
   </button>
 
+  <div class="mobile-toc-panel" id="mobileTocPanel">
+    <div class="mobile-search-inner">
+      <div class="toc-label" style="padding: 0 0 12px 0; margin-bottom: 12px; border-bottom: 1px solid var(--border);">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20" height="20">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+        </svg>
+        On This Page
+      </div>
+      <ul class="toc-list" id="mobileTocList"></ul>
+    </div>
+  </div>
 
-  <!-- ═══════════════════════════════════════════
-       THREE-COLUMN LAYOUT
-       Left 240px sidebar | Center main | Right 220px TOC
-       ═══════════════════════════════════════════ -->
+  <button class="mobile-toc-close-btn" id="mobileTocCloseBtn" aria-label="Close table of contents">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M18 6L6 18M6 6l12 12"/>
+    </svg>
+  </button>
+
+  <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close navigation">
+    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path d="M18 6L6 18M6 6l12 12"/>
+    </svg>
+  </button>
+
   <div class="layout">
 
-    <!-- ─── LEFT: SIDEBAR NAVIGATION ─── -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-mobile-top">
-    <a href="#" class="logo">Rico<sup>©</sup></a>
-  </div>
+        <a href="#" class="logo">Rico<sup>©</sup></a>
+      </div>
       <div class="sidebar-inner">
 
         <div class="nav-group">
@@ -148,11 +132,9 @@
         <div class="nav-group">
           <div class="nav-group-label">Global Sections</div>
 
-          <!-- Announcement bar (standalone link, no children) -->
           <a href="#" class="nav-link" data-page="announcement"
              onclick="navigateTo('announcement'); closeSidebarMobile(); return false;">Announcement bar</a>
 
-          <!-- Feature highlights (collapsible) -->
           <a href="#" class="nav-link" id="nav-feature-highlights"
              onclick="toggleSub('sub-feature', this, event)">
             Feature highlights
@@ -171,7 +153,6 @@
                onclick="navigateTo('link'); closeSidebarMobile(); return false;">Link</a>
           </div>
 
-          <!-- System notifications (collapsible, collapsed) -->
           <a href="#" class="nav-link"
              onclick="toggleSub('sub-system', this, event)">
             System notifications
@@ -184,7 +165,6 @@
                onclick="navigateTo('system-notifications'); closeSidebarMobile(); return false;">Overview</a>
           </div>
 
-          <!-- Maintenance updates (collapsible) -->
           <a href="#" class="nav-link"
              onclick="toggleSub('sub-maintenance', this, event)">
             Maintenance updates
@@ -197,7 +177,6 @@
                onclick="navigateTo('maintenance'); closeSidebarMobile(); return false;">Overview</a>
           </div>
 
-          <!-- User onboarding (collapsible) -->
           <a href="#" class="nav-link"
              onclick="toggleSub('sub-onboarding', this, event)">
             User onboarding
@@ -210,31 +189,26 @@
                onclick="navigateTo('user-onboarding'); closeSidebarMobile(); return false;">Overview</a>
           </div>
 
-        </div><!-- /nav-group Global Sections -->
-      </div><!-- /sidebar-inner -->
-    </aside><!-- /sidebar -->
+        </div>
+      </div>
+    </aside>
 
-
-    <!-- ─── CENTER: MAIN CONTENT ─── -->
     <main id="mainContent">
+      <div class="breadcrumb-row">
+        <div class="breadcrumb" id="breadcrumb"></div>
+        <button class="toc-breadcrumb-btn" id="mobileTocBtn" aria-label="Table of contents" onclick="openMobileToc()">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+          </svg>
+        </button>
+      </div>
 
-      <!-- Breadcrumb — populated by JS -->
-      <div class="breadcrumb" id="breadcrumb"></div>
-
-      <!-- Page title & subtitle — populated by JS -->
       <h1 class="page-title" id="pageTitle"></h1>
       <p class="page-subtitle" id="pageSubtitle"></p>
-
-      <!-- Section content — populated by JS -->
       <div id="sections"></div>
-
-      <!-- Pagination — populated by JS -->
       <nav class="pagination" id="pagination"></nav>
+    </main>
 
-    </main><!-- /main -->
-
-
-    <!-- ─── RIGHT: TABLE OF CONTENTS ─── -->
     <aside class="toc" id="toc">
       <div class="toc-label">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20" height="20">
@@ -242,13 +216,11 @@
         </svg>
         On This Page
       </div>
-      <!-- TOC list — populated by JS -->
       <ul class="toc-list" id="tocList"></ul>
-    </aside><!-- /toc -->
+    </aside>
 
-  </div><!-- /layout -->
+  </div>
 
-  <!-- Scripts: content data first, then interactivity -->
   <script src="content.js"></script>
   <script src="script.js"></script>
 </body>
